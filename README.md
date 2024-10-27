@@ -25,10 +25,11 @@ You can add these dependencies to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-tokio = { version = "1", features = ["full"] }
-reqwest = { version = "0.11", features = ["json"] }
-colored = "2.0"
-indicatif = "0.17"
+colored = "2.1.0"
+reqwest = "0.12.8"
+tokio = { version = "1.41.0", features = ["rt", "rt-multi-thread", "macros"] }
+indicatif = "0.17.8"
+term_size = "0.3"
 ```
 ## Installation
 
