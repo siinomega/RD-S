@@ -1,0 +1,11 @@
+[package]
+name = "Rust-Dir-Scan"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+colored = "2.1.0"
+reqwest = "0.12.8"
+tokio = { version = "1.41.0", features = ["rt", "rt-multi-thread", "macros"] }
+indicatif = "0.17.8"
+term_size = "0.3"
