@@ -35,7 +35,7 @@ indicatif = "0.17"
 1. CloneThe Repository :
 
    ```bash
-   git clone https://github.com/siinomega/rust-dir-scan.git
+   git clone https://github.com/siinomega/RD-S.git
    ```
 2. Accédez au répertoire du projet :
 
