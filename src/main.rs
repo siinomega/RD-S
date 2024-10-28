@@ -12,7 +12,6 @@ async fn main() {
     let banner = reqwest::get("https://gist.githubusercontent.com/siinomega/5bbfe0b73da35f5ceda90a8f035fdc71/raw")
         .await.unwrap().text().await.unwrap();
     println!("{}\n", banner.yellow());
-
     let base_url = loop {
         let mut base_url = String::new();
         print!("Veuillez Entrer Une URL A Tester : ");
@@ -53,6 +52,7 @@ async fn main() {
         let lines: Vec<String> = reader.lines().filter_map(|l| l.ok()).collect();
         let total_paths = lines.len();
         let pb = ProgressBar::new(total_paths as u64);
+        let mut found_paths = vec![];
 
         for word in lines {
             let base_url = base_url.trim_end_matches('/');
@@ -60,7 +60,7 @@ async fn main() {
             match client.get(&full_url).send().await {
                 Ok(response) => {
                     if response.status().as_u16() == 200 || response.status().as_u16() == 302 {
-                        println!("\nFound! --> \"{}\"", full_url); // Print found path immediately
+                        found_paths.push(full_url.clone());
                     }
                 }
                 Err(err) => {
@@ -70,5 +70,11 @@ async fn main() {
             pb.inc(1);
         }
         pb.finish_with_message("Scanning Complete!");
+        if !found_paths.is_empty() {
+            println!("\nFound Paths:");
+            for path in found_paths {
+                println!("{}", path);
+            }
+        }
     }
 }
